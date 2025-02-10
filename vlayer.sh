@@ -7,43 +7,50 @@ curl -s https://raw.githubusercontent.com/zidanaetrna/unichain/refs/heads/main/b
 
 echo "🚀 Starting vlayer Installation on Ubuntu 24 LTS..."
 
-# Update & Install Dependencies
-echo "🔄 Updating system and installing required dependencies..."
-apt update -y && apt upgrade -y
-apt install -y git curl iptables build-essential wget lz4 jq make gcc nano automake autoconf \
-    tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip
+#!/bin/bash
+
+# Update system and install dependencies
+echo "Updating system and installing required packages..."
+apt update && apt install -y git curl wget unzip tar build-essential
 
 # Install Foundry
-echo "🟢 Installing Foundry..."
-cd $HOME && mkdir -p foundry && cd foundry
+echo "Installing Foundry..."
 curl -L https://foundry.paradigm.xyz | bash
-source ~/.bashrc
+source /root/.bashrc
 foundryup
-
-# Install RISC Zero
-echo "🟢 Installing RISC Zero..."
-curl -L https://risczero.com/install | bash
-rzup install
-
-# Install Bun
-echo "🟢 Installing Bun..."
-curl -fsSL https://bun.sh/install | bash
-source ~/.bashrc
+forge --version
 
 # Install vlayer
-echo "🟢 Installing vlayer..."
+echo "Installing vlayer..."
 curl -SL https://install.vlayer.xyz | bash
 source /root/.bashrc
 vlayerup
-
-# Verify installation
-echo "🔍 Verifying vlayer installation..."
 vlayer --version
 
-echo "✅ vlayer installation completed!"
+# Install Bun
+echo "Installing Bun..."
+curl -fsSL https://bun.sh/install | bash
+source /root/.bashrc
 
-echo "📌 Next Steps:"
-echo "➡️ Initialize a new project: vlayer init your-project-name"
-echo "➡️ Add to an existing project: cd your-project-name && vlayer init --existing"
-echo "➡️ Run sample project: vlayer init simple --template simple"
-echo "➡️ More details: https://book.vlayer.xyz/getting-started/installation.html"
+# Create vlayer project
+echo "Creating vlayer project..."
+vlayer init nama-project-kamu --template simple-web-proof
+cd nama-project-kamu
+forge build
+
+# Edit .env.testnet.local file
+echo "Configuring .env.testnet.local..."
+cd vlayer
+cat <<EOF > .env.testnet.local
+VLAYER_API_TOKEN=sk_API-YANG-KAMU-BACKUP
+EXAMPLES_TEST_PRIVATE_KEY=0xPRIVATE-KEY-WALLET-KAMU
+CHAIN_NAME=optimismSepolia
+JSON_RPC_URL=https://sepolia.optimism.io
+EOF
+
+# Run the test proof
+echo "Running test proof..."
+bun run prove:testnet
+
+echo "✅ Installation and setup complete!"
+echo "🫡 Full Details: https://book.vlayer.xyz/getting-started/installation.html"
