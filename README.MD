@@ -4,7 +4,7 @@ Here’s a **detailed tutorial** on deploying and running **vlayer** interactive
 
 # **🚀 vlayer Deployment and Setup Guide**
 
-## **🔹 3️⃣ First Steps: Deploy with vlayer**
+## **🔹  First Steps: Deploy with vlayer**
 ### **Step 1: Initialize a New Project**
 To create a new vlayer project, use:
 ```bash
@@ -29,7 +29,7 @@ This will create a **basic vlayer project** to explore.
 
 ---
 
-## **🔹 4️⃣ Running the Sample Locally**
+## **🔹  Running the Sample Locally**
 Make sure **Bun** is installed before proceeding.
 
 ### **Step 1: Compile Smart Contracts**
@@ -82,7 +82,7 @@ bun run prove.ts
 
 ---
 
-## **🔹 5️⃣ Web Proof Sample**
+## **🔹  Web Proof Sample**
 ### **Step 1: Install vlayer Browser Extension**
 To interact with proofs via a web interface, install the **vlayer Chrome extension**:  
 🔗 [**vlayer Chrome Extension**](https://chromewebstore.google.com/detail/vlayer/jbchhcgphfokabmfacnkafoeeeppjmpl)
